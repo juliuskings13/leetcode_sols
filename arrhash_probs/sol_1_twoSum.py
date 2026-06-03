@@ -1,0 +1,13 @@
+class Solution:
+	def twoSum(self, nums: List[int], target: int) -> List[int]:
+
+		seen = dict()
+
+		for i in range(len(nums)):
+			comp = target - nums[i]
+
+			if comp in seen:
+				return [seen.get(comp), i]
+
+			seen.setdefault(nums[i], i)
+
