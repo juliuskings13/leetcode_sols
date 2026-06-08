@@ -1,13 +1,18 @@
-from sol_217_containsDuplicate import Solution
+import pytest
+from arr_hash.sol_217_containsDuplicate import Solution
 
-solver = Solution()
+@pytest.fixture
+def tester():
+	return Solution()
 
-assert solver.containsDuplicate([1,2,3,1]) == True, "test 1 fail"
+@pytest.mark.parametrize("nums, trueFalse", [
+	([1,2,3,1],True),
+	([1,2,3,4], False),
+	([1,1,1,3,3,4,3,2,4,2], True),
+	([], False),
+	([1], False)
+])
 
-assert solver.containsDuplicate([1,2,3,4]) == False, "test 2 fail"
+def testContDupe(tester, nums, trueFalse):
+	assert tester.containsDuplicate(nums) == trueFalse
 
-assert solver.containsDuplicate([1,1,1,3,3,4,3,2,4,2]) == True, "test 3 fail"
-
-assert solver.containsDuplicate([]) == False, "test 4 fail"
-
-assert solver.containsDuplicate([1]) == False, "test 5 fail"

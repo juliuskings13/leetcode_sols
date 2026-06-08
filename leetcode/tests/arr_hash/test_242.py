@@ -1,12 +1,15 @@
-from sol_242_validAnagram import Solution
+import pytest
+from arr_hash.sol_242_validAnagram import Solution
 
-solver = Solution()
+@pytest.fixture
+def tester(): 
+	return Solution()
 
-#not needed as strings cannot be empty
-#assert solver.isAnagram("", "") , "test 1 fail"
+@pytest.mark.parametrize("s, t, trueFalse", [
+	("", "a", False),
+	("anagram", "nagaram", True),
+	("rat", "car", False)
+])
 
-assert solver.isAnagram("", "a") == False, "test 2 fail"
-
-assert solver.isAnagram("anagram", "nagaram") == True, "test 3 fail"
-
-assert solver.isAnagram("rat", "car") == False, "test 4 fail"
+def testIsAnagram(tester, s, t, trueFalse):
+	assert tester.isAnagram(s, t) == trueFalse
